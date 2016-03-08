@@ -30,7 +30,7 @@ class PyTest(TestCommand):
 
     def finalize_options(self):
         TestCommand.finalize_options(self)
-        self.test_args = ['--pylint']
+        self.test_args = ['--pylint', '--runslow', '--driver=Firefox']
         self.test_suite = True
 
     def run_tests(self):
@@ -41,7 +41,7 @@ class PyTest(TestCommand):
 
 setup(
     author=flask_forecaster.__author__,
-    author_email='mail@jonrshar.pe',
+    author_email='jsharpe@pivotal.io',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
@@ -49,7 +49,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3 :: Only',
-        'Topic :: Communications :: Chat',
     ],
     cmdclass={'test': PyTest},
     description=flask_forecaster.__doc__,
@@ -64,6 +63,6 @@ setup(
         'pytest-flask',
         'pytest-pylint',
     ],
-    url='http://github.com/textbook/halliwell/',
+    url='http://github.com/textbook/flask-forecaster/',
     version=flask_forecaster.__version__,
 )

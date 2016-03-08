@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tracker Forecaster</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Flask Tracker Forecaster</h1>
+  <form method="post" action="/">
+    <div class="token-input">
+      {{ form.hidden_tag() }}
+      {{ form.token.label }}{{ form.token(size=40) }}
+      <input type="submit" value="Verify">
+    </div>
+    {% if form.token.errors %}<div class="token-errors">
+      {% for error in form.token.errors %}<span class="error-message">{{ error }}</span>{% endfor %}
+    </div>{% endif %}
+    <div class="token-reminder"><p>Don't know your token? Find it online
+      <a href="https://www.pivotaltracker.com/profile#api">here (login required)</a>.
+    </p></div>
+  </form>
+</body>
+</html>
