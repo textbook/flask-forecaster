@@ -1,0 +1,6 @@
+---
+applications:
+- name: forecaster
+  buildpack: https://github.com/cloudfoundry/python-buildpack#v1.5.4
+  command: python scripts/launch_app.py
+  random-route: true
