@@ -14,5 +14,5 @@ deploy:
     username: $CF_USERNAME
     password: $CF_PASSWORD
     organization: labs-playground
-    space: 'Jonathan Sharpe'
+    space: jsharpe
     manifest: manifest.yml
