@@ -10,7 +10,7 @@ after_success: coveralls
 deploy:
   - provider: cloudfoundry
     edge: true
-    api: https://api.run.pez.pivotal.io
+    api: https://api.run.pivotal.io
     username: $CF_USERNAME
     password: $CF_PASSWORD
     organization: labs-playground
