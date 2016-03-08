@@ -13,6 +13,6 @@ deploy:
     api: https://api.run.pez.pivotal.io
     username: $CF_USERNAME
     password: $CF_PASSWORD
-    organization: pivot-jsharpe
-    space: forecaster
+    organization: labs-playground
+    space: Jonathan Sharpe
     manifest: manifest.yml
