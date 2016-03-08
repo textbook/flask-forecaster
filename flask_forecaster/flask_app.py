@@ -2,9 +2,9 @@
 
 from flask import Flask
 
-APP = Flask(__name__)
+app = Flask(__name__)
 
-@APP.route('/')
+@app.route('/')
 def home():
     """Basic home page."""
     return 'hello world'

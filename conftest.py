@@ -1,7 +1,7 @@
 import pytest
 
-from flask_forecaster import APP as app_func
+from flask_forecaster import app as app_
 
 @pytest.fixture
 def app():
-    return app_func
+    return app_

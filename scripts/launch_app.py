@@ -1,7 +1,8 @@
 #! /usr/bin/env python3
 """Launch the flask-forecaster application."""
+import os
 
-from flask_forecaster import APP
+from flask_forecaster import app
 
 if __name__ == '__main__':
-    APP.run()
+    app.run(host='0.0.0.0', port=int(os.getenv('PORT')))
