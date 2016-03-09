@@ -1,5 +1,8 @@
 """Functionality for interacting with the Tracker API."""
+import logging
 import requests
+
+logger = logging.getLogger(__name__)
 
 
 class Tracker:
@@ -24,4 +27,10 @@ class Tracker:
             headers={'X-TrackerToken': token},
         )
         if response.status_code == 200:
-            return response.json().get('projects')
+            result = response.json()
+            error = result.get('error')
+            if error:
+                logging.warning('API call failed with error %s', error)
+            return result.get('projects')
+        else:
+            logging.warning('request failed with code %s', response.status_code)
