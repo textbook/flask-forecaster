@@ -1,11 +1,12 @@
 """The main web application."""
+import os
 
 from flask import Flask, render_template
 
 from .forms import TrackerApiForm
 
 
-SECRET_KEY = 'somethingyoucantguess'
+SECRET_KEY = os.getenv('FLASK_SECRET_KEY') or 'somethingyoucantguess'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
