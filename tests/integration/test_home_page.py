@@ -33,6 +33,5 @@ class TestHomePage:
         elem = selenium.find_element_by_id('token')
         elem.send_keys(os.getenv('VALID_API_TOKEN'))
         elem.send_keys(Keys.RETURN)
-        assert 'Enter Tracker API token:' not in selenium.page_source
         assert 'Projects' in selenium.page_source
         selenium.close()

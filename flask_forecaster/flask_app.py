@@ -25,6 +25,6 @@ def home():
         logger.info('validating token %s', token)
         projects = Tracker.validate_token(token)
         if projects:
-            return render_template('index.html', projects=projects)
+            return render_template('index.html', form=form, projects=projects)
         form.token.errors = ['API token must be valid for the Tracker API']
     return render_template('index.html', form=form)
