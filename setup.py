@@ -32,7 +32,7 @@ class PyTest(TestCommand):
         TestCommand.finalize_options(self)
         self.test_args = [
             '--pylint',
-            '--pylint-error-types=WEF',
+            '--pylint-error-types=FEW',
             '--runslow',
             '--driver=Firefox',
         ]
