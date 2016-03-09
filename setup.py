@@ -30,7 +30,12 @@ class PyTest(TestCommand):
 
     def finalize_options(self):
         TestCommand.finalize_options(self)
-        self.test_args = ['--pylint', '--runslow', '--driver=Firefox']
+        self.test_args = [
+            '--pylint',
+            '--pylint-error-types=WEF',
+            '--runslow',
+            '--driver=Firefox',
+        ]
         self.test_suite = True
 
     def run_tests(self):
@@ -52,7 +57,11 @@ setup(
     ],
     cmdclass={'test': PyTest},
     description=flask_forecaster.__doc__,
-    install_requires=[],
+    install_requires=[
+        'Flask',
+        'Flask-WTF',
+        'requests',
+    ],
     license='License :: OSI Approved :: ISC License (ISCL)',
     long_description=long_description,
     name='flask_forecaster',
@@ -62,6 +71,8 @@ setup(
         'pytest',
         'pytest-flask',
         'pytest-pylint',
+        'pytest-selenium',
+        'responses',
     ],
     url='http://github.com/textbook/flask-forecaster/',
     version=flask_forecaster.__version__,

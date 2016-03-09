@@ -1,5 +1,6 @@
 astroid==1.4.4
 colorama==0.3.7
+cookies==2.2.1
 Flask==0.10.1
 Flask-WTF==0.12
 itsdangerous==0.24
@@ -15,8 +16,10 @@ pytest-pylint==0.4.1
 pytest-selenium==1.2.1
 pytest-variables==1.3
 requests==2.9.1
+responses==0.5.1
 selenium==2.52.0
 six==1.10.0
+tracker==0.1.1
 Werkzeug==0.11.4
 wrapt==1.10.6
 WTForms==2.1

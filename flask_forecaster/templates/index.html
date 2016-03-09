@@ -7,18 +7,34 @@
 </head>
 <body>
   <h1>Flask Tracker Forecaster</h1>
-  <form method="post" action="/">
-    <div class="token-input">
-      {{ form.hidden_tag() }}
-      {{ form.token.label }}{{ form.token(size=40) }}
-      <input type="submit" value="Verify">
-    </div>
-    {% if form.token.errors %}<div class="token-errors">
-      {% for error in form.token.errors %}<span class="error-message">{{ error }}</span>{% endfor %}
-    </div>{% endif %}
-    <div class="token-reminder"><p>Don't know your token? Find it online
-      <a href="https://www.pivotaltracker.com/profile#api">here</a> (login required).
-    </p></div>
-  </form>
+
+  {% if form %}
+    <h2>API Token</h2>
+    <form method="post" action="/">
+      <div class="token-input">
+        {{ form.hidden_tag() }}
+        {{ form.token.label }}{{ form.token(size=40) }}
+        <input type="submit" value="Verify">
+      </div>
+      {% if form.token.errors %}
+        <div class="token-errors">
+          {% for error in form.token.errors %}
+            <span class="error-message">{{ error }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="token-reminder"><p>Don't know your token? Find it online
+        <a href="https://www.pivotaltracker.com/profile#api">here</a> (login required).
+      </p></div>
+    </form>
+  {% endif %}
+  {% if projects %}
+    <h2>Projects</h2>
+    <ul class="project-list">
+      {% for project in projects %}
+        <li class="project-entry"><span class="project-entry-name">{{ project.project_name }}</span></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 </body>
 </html>
