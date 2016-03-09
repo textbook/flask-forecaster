@@ -2,7 +2,10 @@ import re
 
 from flask import url_for
 import pytest
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
 
 from helpers import TOKEN, slow
 
@@ -13,6 +16,8 @@ class TestHomePage:
 
     def test_home_page_available(self, selenium):
         _go_to_home_page(selenium)
+        title = 'Tracker Forecaster'
+        _wait_for_title(selenium, title)
         assert selenium.title == 'Tracker Forecaster'
         assert 'Enter Tracker API token:' in selenium.page_source
         selenium.close()
@@ -33,7 +38,7 @@ class TestHomePage:
     def test_project_links(self, selenium):
         _go_to_home_page(selenium)
         _enter_token(selenium, TOKEN)
-        link = selenium.find_element_by_css_selector('.project-entry a')
+        link = _wait_for_element(selenium, By.CSS_SELECTOR, '.project-entry a')
         project_id = self._get_project_id_from_link(link)
         link.click()
         assert selenium.current_url == url_for(
@@ -57,7 +62,7 @@ class TestProjectPage:
     def test_project_page_contains_project_data(self, selenium):
         _go_to_home_page(selenium)
         _enter_token(selenium, TOKEN)
-        link = selenium.find_element_by_css_selector('.project-entry a')
+        link = _wait_for_element(selenium, By.CSS_SELECTOR, '.project-entry a')
         project_name = link.text
         link.click()
         assert project_name in selenium.page_source
@@ -65,10 +70,21 @@ class TestProjectPage:
 
 def _go_to_home_page(selenium):
     selenium.get(url_for('home', _external=True))
+    _wait_for_title(selenium, 'Tracker Forecaster')
 
 
 def _enter_token(selenium, token):
     assert 'Enter Tracker API token:' in selenium.page_source
-    elem = selenium.find_element_by_id('token')
+    elem = _wait_for_element(selenium, By.ID, 'token')
     elem.send_keys(token)
     elem.send_keys(Keys.RETURN)
+
+
+def _wait_for_element(selenium, by, value):
+    return WebDriverWait(selenium, 5).until(
+        expected_conditions.presence_of_element_located((by, value))
+    )
+
+
+def _wait_for_title(selenium, title):
+    WebDriverWait(selenium, 5).until(expected_conditions.title_is(title))
