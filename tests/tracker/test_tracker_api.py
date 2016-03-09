@@ -1,6 +1,12 @@
+import pytest
 import responses
 
 from flask_forecaster.tracker import Tracker
+
+
+@pytest.fixture
+def api():
+    return Tracker('hello')
 
 
 class TestTokenValidation:
@@ -45,3 +51,20 @@ class TestTokenValidation:
         assert len(calls) == 1
         assert calls[0].request.headers.get('X-TrackerToken') == 'hello'
         assert result is None
+
+class TestProjectFetch:
+
+    @responses.activate
+    def test_get_project_data(self, api):
+        project = dict(name='demo', description='some stupid project')
+        responses.add(
+            responses.GET,
+            'https://www.pivotaltracker.com/services/v5/projects/123',
+            json=project,
+            status=200,
+        )
+        result = api.get_project(123)
+        calls = responses.calls
+        assert len(calls) == 1
+        assert calls[0].request.headers.get('X-TrackerToken') == 'hello'
+        assert result == project

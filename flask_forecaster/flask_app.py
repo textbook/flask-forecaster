@@ -40,4 +40,5 @@ def project(project_id):
     token = session.get('token')
     if token is None:
         return redirect(url_for('home'))
-    return 'Details page for {}'.format(project_id)
+    api = Tracker(token)
+    return render_template('project.html', project=api.get_project(project_id))
