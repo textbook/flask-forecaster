@@ -3,7 +3,7 @@ import os
 from flask import url_for
 import pytest
 
-from helpers import slow
+from helpers import TOKEN, slow
 from selenium.webdriver.common.keys import Keys
 
 
@@ -31,7 +31,15 @@ class TestHomePage:
         selenium.get(url_for('home', _external=True))
         assert 'Enter Tracker API token:' in selenium.page_source
         elem = selenium.find_element_by_id('token')
-        elem.send_keys(os.getenv('VALID_API_TOKEN'))
+        elem.send_keys(TOKEN)
         elem.send_keys(Keys.RETURN)
         assert 'Projects' in selenium.page_source
         selenium.close()
+
+@pytest.mark.usefixtures('live_server')
+@slow
+class TestProjectPage:
+
+    def test_project_page_redirects_to_home(self, selenium):
+        selenium.get(url_for('project', project_id=123, _external=True))
+        assert selenium.current_url == url_for('home', _external=True)

@@ -31,7 +31,11 @@
     <h2>Projects</h2>
     <ul class="project-list">
       {% for project in projects %}
-        <li class="project-entry"><span class="project-entry-name">{{ project.project_name }}</span></li>
+        <li class="project-entry">
+          <a href="{{ url_for('project', project_id=project.project_id) }}">
+            <span class="project-entry-name">{{ project.project_name }}</span>
+          </a>
+        </li>
       {% endfor %}
     </ul>
   {% endif %}
