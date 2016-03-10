@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-from helpers import TOKEN, slow
+from helpers import slow
 
 
 @pytest.mark.usefixtures('live_server')
@@ -29,15 +29,15 @@ class TestHomePage:
         assert err_msg in selenium.page_source
         selenium.close()
 
-    def test_token_entry_accepted(self, selenium):
+    def test_token_entry_accepted(self, selenium, config):
         _go_to_home_page(selenium)
-        _enter_token(selenium, TOKEN)
+        _enter_token(selenium, config.get('VALID_TOKEN'))
         assert 'Projects' in selenium.page_source
         selenium.close()
 
-    def test_project_links(self, selenium):
+    def test_project_links(self, selenium, config):
         _go_to_home_page(selenium)
-        _enter_token(selenium, TOKEN)
+        _enter_token(selenium, config.get('VALID_TOKEN'))
         link = _wait_for_element(selenium, By.CSS_SELECTOR, '.project-entry a')
         project_id = self._get_project_id_from_link(link)
         link.click()
@@ -59,9 +59,9 @@ class TestProjectPage:
         selenium.get(url_for('project', project_id=123, _external=True))
         assert selenium.current_url == url_for('home', _external=True)
 
-    def test_project_page_contains_project_data(self, selenium):
+    def test_project_page_contains_project_data(self, selenium, config):
         _go_to_home_page(selenium)
-        _enter_token(selenium, TOKEN)
+        _enter_token(selenium, config.get('VALID_TOKEN'))
         link = _wait_for_element(selenium, By.CSS_SELECTOR, '.project-entry a')
         project_name = link.text
         link.click()

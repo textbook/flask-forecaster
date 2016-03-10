@@ -1,26 +1,19 @@
 """The main web application."""
 
 import logging
-import os
 
 from flask import Flask, redirect, render_template, session, url_for
 
-from .config import DevelopmentConfig, ProductionConfig, TestingConfig
+from .config import Config
 from .forms import TrackerApiForm
 from .tracker import Tracker
-
-CONFIG_OPTIONS = dict(
-    dev=DevelopmentConfig(),
-    prod=ProductionConfig(),
-    test=TestingConfig(),
-)
 
 logger = logging.getLogger(__name__)
 
 __version__ = '0.0.3'
 
 app = Flask(__name__)
-app.config.from_object(CONFIG_OPTIONS[os.getenv('FLASK_CONFIG', 'prod')])
+app.config.from_object(Config.for_current_env())
 
 
 @app.route('/', methods=('GET', 'POST'))
