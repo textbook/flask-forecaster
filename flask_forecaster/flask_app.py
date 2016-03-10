@@ -10,6 +10,8 @@ from .tracker import Tracker
 
 logger = logging.getLogger(__name__)
 
+__version__ = '0.0.3'
+
 SECRET_KEY = os.getenv('FLASK_SECRET_KEY') or 'somethingyoucantguess'
 
 app = Flask(__name__)
@@ -29,9 +31,14 @@ def home():
         projects = Tracker.validate_token(token)
         if projects:
             session['token'] = token
-            return render_template('index.html', form=form, projects=projects)
+            return render_template(
+                'index.html',
+                form=form,
+                projects=projects,
+                version=__version__,
+            )
         form.token.errors = ['API token must be valid for the Tracker API']
-    return render_template('index.html', form=form)
+    return render_template('index.html', form=form, version=__version__)
 
 
 @app.route('/project/<int:project_id>')
