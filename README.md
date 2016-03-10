@@ -11,8 +11,8 @@ The current configuration supports three distinct environments, which
 can be selected using the environment variable `FLASK_CONFIG`:
 
  * `dev`: For local development, which starts the app in debug mode;
- * `test`: For CI environments (e.g. Travis CI), which starts the app in 
- testing mode and also requires:
+ * `test`: For testing and continuous integration environments (e.g. 
+ Travis CI), which starts the app in testing mode and also requires:
      * `VALID_API_TOKEN`: A valid token for integration testing; and
  * `prod` [**default**]: For production environments (e.g. Cloud 
  Foundry), which starts the app in its default mode and also requires:
