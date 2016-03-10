@@ -1,5 +1,3 @@
-from unittest import mock
-
 from flask import url_for
 
 from flask_forecaster.constants import HttpStatus
