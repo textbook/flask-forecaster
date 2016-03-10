@@ -1,13 +1,18 @@
 language: python
 python:
 - '3.5'
+addons:
+  postgresql: "9.4"
 install:
 - pip install -r requirements.txt
 - pip install coveralls
+services:
+  - postgresql
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
+  - psql -c 'create database flask_test;' -U postgres
 script:
 - coverage run --source=flask_forecaster setup.py test
 after_success: coveralls
@@ -20,3 +25,4 @@ deploy:
     organization: $CF_ORG
     space: $CF_SPACE
     manifest: manifest.yml
+

@@ -2,11 +2,13 @@ astroid==1.4.4
 colorama==0.3.7
 cookies==2.2.1
 Flask==0.10.1
+Flask-SQLAlchemy==2.1
 Flask-WTF==0.12
 itsdangerous==0.24
 Jinja2==2.8
 lazy-object-proxy==1.2.1
 MarkupSafe==0.23
+psycopg2==2.6.1
 py==1.4.31
 pylint==1.5.4
 pytest==2.9.0
@@ -19,6 +21,7 @@ requests==2.9.1
 responses==0.5.1
 selenium==2.52.0
 six==1.10.0
+SQLAlchemy==1.0.12
 tracker==0.1.1
 Werkzeug==0.11.4
 wrapt==1.10.6

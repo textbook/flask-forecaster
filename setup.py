@@ -59,7 +59,9 @@ setup(
     description=flask_forecaster.__doc__,
     install_requires=[
         'Flask',
+        'Flask-SQLAlchemy',
         'Flask-WTF',
+        'psycopg2',
         'requests',
     ],
     license='License :: OSI Approved :: ISC License (ISCL)',

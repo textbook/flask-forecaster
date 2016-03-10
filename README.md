@@ -17,7 +17,11 @@ can be selected using the environment variable `FLASK_CONFIG`:
  * `prod` [**default**]: For production environments (e.g. Cloud 
  Foundry), which starts the app in its default mode and also requires:
      * `FLASK_SECRET_KEY`: The secret key for CORS protection; and
-     * `PORT`: The port for the host (**note**: this is provided by CF).
+     * `PORT`: The port for the host (**note**: this is provided by CF);
+     * `POSTGRES_SERVICE`: The name of the PostgreSQL service, as it 
+     appears in `VCAP_SERVICES`; and
+     * `VCAP_SERVICES`: The credentials for the services the app can
+     interact with (**note**: this is provided by CF).
 
 Whenever `py.test` is run with the `--runslow` option (which is used by
 default for `python setup.py test`) the `FLASK_CONFIG` must be set to 
