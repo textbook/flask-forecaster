@@ -5,17 +5,22 @@ import os
 
 from flask import Flask, redirect, render_template, session, url_for
 
+from .config import DevelopmentConfig, ProductionConfig, TestingConfig
 from .forms import TrackerApiForm
 from .tracker import Tracker
+
+CONFIG_OPTIONS = dict(
+    dev=DevelopmentConfig(),
+    prod=ProductionConfig(),
+    test=TestingConfig(),
+)
 
 logger = logging.getLogger(__name__)
 
 __version__ = '0.0.3'
 
-SECRET_KEY = os.getenv('FLASK_SECRET_KEY') or 'somethingyoucantguess'
-
 app = Flask(__name__)
-app.config.from_object(__name__)
+app.config.from_object(CONFIG_OPTIONS[os.getenv('FLASK_CONFIG', 'prod')])
 
 
 @app.route('/', methods=('GET', 'POST'))
