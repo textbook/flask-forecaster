@@ -3,7 +3,7 @@
 import logging
 import requests
 
-from ..constants import status
+from ..constants import HttpStatus
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +39,7 @@ class Tracker:
     @staticmethod
     def _handle_response(response):
         """Handle the standard response pattern."""
-        if response.status_code == status.OK:
+        if response.status_code == HttpStatus.OK:
             result = response.json()
             if 'error' in result:
                 logger.warning('API call failed with error %s', result['error'])

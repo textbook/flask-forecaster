@@ -1,7 +1,9 @@
 """Useful values to keep around."""
 
-status = type('HttpStatusCodes', (object,), dict(
-    NOT_FOUND=404,
-    REDIRECTED=302,
-    OK=200,
-))
+
+class HttpStatus:
+    """Friendly names for HTTP status codes."""
+
+    NOT_FOUND = 404
+    REDIRECTED = 302
+    OK = 200
