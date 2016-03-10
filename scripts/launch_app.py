@@ -4,7 +4,6 @@
 import logging
 import sys
 
-from flask_forecaster import app
 
 logging.basicConfig(
     datefmt='%Y/%m/%d %H.%M.%S',
@@ -14,4 +13,5 @@ logging.basicConfig(
 )
 
 if __name__ == '__main__':
+    from flask_forecaster import app
     app.run()

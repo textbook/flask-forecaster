@@ -1,6 +1,9 @@
 """Flask configuration options."""
 
+import logging
 import os
+
+logger = logging.getLogger(__name__)
 
 
 class ConfigError(ValueError):
@@ -76,4 +79,5 @@ class Config:
         else:
             raise ValueError('unrecognised environment: {!r}'.format(env))
         config_vars['environment'] = env
+        logger.info('configuring %r environment', env)
         return type(env, (cls,), config_vars)
