@@ -45,27 +45,18 @@ class TestConfig:
         assert config.environment == env
         getenv.assert_any_call('hello', 'world')
 
-    def test_development_environment(self, getenv):
-        getenv.side_effect = lambda env_var, default: default
-        config = Config.for_current_env(default='dev')
-        assert config.DEBUG
-        assert not config.TESTING
-
+    @pytest.mark.parametrize('env,debug,testing,requires', [
+        ('dev', True, False, []),
+        ('test', False, True, ['VALID_API_TOKEN']),
+        ('prod', False, False, ['FLASK_SECRET_KEY', 'PORT']),
+    ])
     @mock.patch('flask_forecaster.config.require')
-    def test_testing_environment(self, require, getenv):
+    def test_config_environment(self, require, getenv, env, debug, testing, requires):
         getenv.side_effect = lambda env_var, default: default
-        config = Config.for_current_env(default='test')
-        assert not config.DEBUG
-        assert config.TESTING
-        require.assert_called_once_with('VALID_API_TOKEN')
-
-    @mock.patch('flask_forecaster.config.require')
-    def test_production_environment(self, require, getenv):
-        getenv.side_effect = lambda env_var, default: default
-        config = Config.for_current_env()
-        assert not config.DEBUG
-        assert not config.TESTING
+        config = Config.for_current_env(default=env)
+        assert config.DEBUG is debug
+        assert config.TESTING is testing
         require.assert_has_calls(
-            [call('FLASK_SECRET_KEY'), call('PORT')],
+            [call(req) for req in requires],
             any_order=True,
         )
