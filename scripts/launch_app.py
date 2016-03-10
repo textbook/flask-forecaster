@@ -12,7 +12,7 @@ logging.basicConfig(
     stream=sys.stdout,
 )
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('launch_app')
 
 if __name__ == '__main__':
     from flask_forecaster import app

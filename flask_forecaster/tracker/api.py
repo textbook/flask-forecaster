@@ -8,7 +8,7 @@ from ..constants import HttpStatus
 logger = logging.getLogger(__name__)
 
 
-class Tracker:
+class Tracker(object):
     """Represents the API and exposes appropriate methods."""
 
     BASE_URL = 'https://www.pivotaltracker.com/services/v5/'

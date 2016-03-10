@@ -1,7 +1,7 @@
 """Useful values to keep around."""
 
 
-class HttpStatus:
+class HttpStatus(object):
     """Friendly names for HTTP status codes."""
 
     NOT_FOUND = 404

@@ -12,7 +12,7 @@ class ConfigError(ValueError):
     pass
 
 
-class Config:
+class Config(object):
     """Configuration defaults."""
 
     DEBUG = False
