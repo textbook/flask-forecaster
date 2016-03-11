@@ -15,8 +15,10 @@ __version__ = '0.0.5'
 
 app = Flask(__name__)
 app.config.from_object(Config.for_current_env())
-db = SQLAlchemy(app)
-logger.info('connected to database %r', app.config['SQLALCHEMY_DATABASE_URI'])
+
+if app.config.get('SQLALCHEMY_DATABASE_URI') is not None:
+    db = SQLAlchemy(app)
+    logger.info('connected to database %r', app.config['SQLALCHEMY_DATABASE_URI'])
 
 
 @app.route('/', methods=('GET', 'POST'))

@@ -27,6 +27,10 @@ class Config(object):
     def for_current_env(cls, env_var='FLASK_CONFIG', default='prod'):
         """Generate configuration for the current environment.
 
+        Notes:
+          There is a special case for the documentation, which is built
+          and hosted on `ReadTheDocs`_.
+
         Arguments:
           env_var (:py:class:`str`, optional): The environment variable
             to get the current Flask environment from (defaults to
@@ -43,7 +47,13 @@ class Config(object):
           :py:class:`ValueError`: If the Flask environment is not one
             of ``'dev'``, ``'prod'`` or ``'test'``.
 
+        .. _ReadTheDocs:
+          https://readthedocs.org/
+
         """
+        if os.getenv('READTHEDOCS'):
+            config = type('RTFD', (cls,), dict(SQLALCHEMY_DATABASE_URI=None))
+            return config
         env = os.getenv(env_var, default)
         if env == 'dev':
             config_vars = dict(
@@ -51,18 +61,18 @@ class Config(object):
             )
         elif env == 'prod':
             config_vars = dict(
-                SQLALCHEMY_DATABASE_URI=_parse_vcap(
+                SQLALCHEMY_DATABASE_URI=parse_vcap(
                     'POSTGRES_SERVICE',
                     (0, 'credentials', 'uri'),
                 ),
-                SECRET_KEY=_require('FLASK_SECRET_KEY'),
+                SECRET_KEY=require('FLASK_SECRET_KEY'),
                 SERVER_BASE='0.0.0.0',
-                SERVER_PORT=_require('PORT'),
+                SERVER_PORT=require('PORT'),
             )
         elif env == 'test':
             config_vars = dict(
-                PROJECT_ID=_require('ACCESSIBLE_PROJECT'),
-                VALID_TOKEN=_require('VALID_API_TOKEN'),
+                PROJECT_ID=require('ACCESSIBLE_PROJECT'),
+                VALID_TOKEN=require('VALID_API_TOKEN'),
                 TESTING=True,
             )
         else:
@@ -72,7 +82,7 @@ class Config(object):
         return type(env, (cls,), config_vars)
 
 
-def _parse_vcap(service, route):
+def parse_vcap(service, route):
     """Extract service details from VCAP_SERVICES.
 
     Arguments:
@@ -85,14 +95,14 @@ def _parse_vcap(service, route):
       :py:class:`str`: The required configuration string.
 
     """
-    data = json.loads(_require('VCAP_SERVICES'))
-    config = data.get(_require(service))
+    data = json.loads(require('VCAP_SERVICES'))
+    config = data.get(require(service))
     for key in route:
         config = config[key]
     return config
 
 
-def _require(name, env='prod'):
+def require(name, env='prod'):
     """Require a specific environment variable to be present.
 
     Arguments:
