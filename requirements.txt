@@ -6,7 +6,6 @@ colorama==0.3.7
 cookies==2.2.1
 docutils==0.12
 Flask==0.10.1
--e git+git@github.com:textbook/flask-forecaster.git@c0ae0ea6ca1f02fca93cedea0658ea55b1e5d653#egg=flask_forecaster
 Flask-Migrate==1.8.0
 Flask-Script==2.0.5
 Flask-SQLAlchemy==2.1
