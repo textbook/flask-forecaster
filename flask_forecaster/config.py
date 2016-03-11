@@ -17,7 +17,8 @@ class Config(object):
 
     DEBUG = False
     SECRET_KEY = 'youwillneverguessme'
-    SERVER_NAME = 'localhost:5000'
+    SERVER_BASE = 'localhost'
+    SERVER_PORT = '5000'
     SQLALCHEMY_DATABASE_URI = 'postgresql://postgres@localhost/flask_test'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     TESTING = False
@@ -55,7 +56,8 @@ class Config(object):
                     (0, 'credentials', 'uri'),
                 ),
                 SECRET_KEY=_require('FLASK_SECRET_KEY'),
-                SERVER_NAME='0.0.0.0:{}'.format(_require('PORT')),
+                SERVER_BASE='0.0.0.0',
+                SERVER_PORT=_require('PORT'),
             )
         elif env == 'test':
             config_vars = dict(
