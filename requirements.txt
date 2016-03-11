@@ -1,15 +1,20 @@
 alabaster==0.7.7
+alembic==0.8.5
 astroid==1.4.4
 Babel==2.2.0
 colorama==0.3.7
 cookies==2.2.1
 docutils==0.12
 Flask==0.10.1
+-e git+git@github.com:textbook/flask-forecaster.git@c0ae0ea6ca1f02fca93cedea0658ea55b1e5d653#egg=flask_forecaster
+Flask-Migrate==1.8.0
+Flask-Script==2.0.5
 Flask-SQLAlchemy==2.1
 Flask-WTF==0.12
 itsdangerous==0.24
 Jinja2==2.8
 lazy-object-proxy==1.2.1
+Mako==1.0.4
 MarkupSafe==0.23
 psycopg2==2.6.1
 py==1.4.31
@@ -21,6 +26,7 @@ pytest-html==1.8.0
 pytest-pylint==0.4.1
 pytest-selenium==1.2.1
 pytest-variables==1.3
+python-editor==0.5
 pytz==2015.7
 requests==2.9.1
 responses==0.5.1

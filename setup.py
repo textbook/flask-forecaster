@@ -54,6 +54,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'Flask',
+        'Flask-Migrate',
         'Flask-SQLAlchemy',
         'Flask-WTF',
         'psycopg2',

@@ -20,6 +20,8 @@ if app.config.get('SQLALCHEMY_DATABASE_URI') is not None:
     db = SQLAlchemy(app)
     logger.info('connected to database %r', app.config['SQLALCHEMY_DATABASE_URI'])
 
+from .db.models import ProjectHistory  # pylint: disable=wrong-import-position,unused-import
+
 
 @app.route('/', methods=('GET', 'POST'))
 def home():
