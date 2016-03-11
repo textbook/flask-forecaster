@@ -3,7 +3,7 @@ import datetime
 from enum import Enum, unique
 
 
-class _AutoNumber(Enum):
+class AutoNumber(Enum):
     """Auto-numbered enumerator from the `Python Docs`_.
 
     .. _Python Docs:
@@ -19,7 +19,7 @@ class _AutoNumber(Enum):
 
 
 @unique
-class StoryState(_AutoNumber):
+class StoryState(AutoNumber):
     """Valid states for a story."""
     accepted = ()
     delivered = ()
@@ -32,7 +32,7 @@ class StoryState(_AutoNumber):
 
 
 @unique
-class StoryType(_AutoNumber):
+class StoryType(AutoNumber):
     """Valid types for a story."""
     feature = ()
     bug = ()
@@ -40,7 +40,7 @@ class StoryType(_AutoNumber):
     release = ()
 
 
-class _BaseModel(metaclass=ABCMeta):
+class BaseModel(metaclass=ABCMeta):
     """Abstract base class for the models."""
 
     @classmethod
@@ -50,7 +50,7 @@ class _BaseModel(metaclass=ABCMeta):
         raise NotImplementedError
 
 
-class ProjectSnapshot(_BaseModel):
+class ProjectSnapshot(BaseModel):
     """Represents the `Project Snapshot resource`_.
 
     Arguments:
@@ -87,10 +87,10 @@ class ProjectSnapshot(_BaseModel):
         return snapshot
 
 
-class StorySnapshot(_BaseModel):
+class StorySnapshot(BaseModel):
     """Represents the `Story Snapshot resource`_.
 
-    .. _StorySnapshot resource:
+    .. _Story Snapshot resource:
       https://www.pivotaltracker.com/help/api/rest/v5#story_snapshot_resource
 
     """

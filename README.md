@@ -2,6 +2,7 @@
 
 [![Build Status][1]][2]
 [![Coverage Status][3]][4]
+[![Documentation Status][5]][6]
 
 A Flask-based web app for forecasting Pivotal Tracker projects.
 
@@ -45,5 +46,7 @@ This creates the required test DB using the default PostgreSQL user.
   [2]: https://travis-ci.org/textbook/flask-forecaster
   [3]: https://coveralls.io/repos/github/textbook/flask-forecaster/badge.svg?branch=master
   [4]: https://coveralls.io/github/textbook/flask-forecaster?branch=master
+  [5]: https://readthedocs.org/projects/flask-forecaster/badge/?version=latest
+  [6]: http://flask-forecaster.readthedocs.org/en/latest/?badge=latest
 
   [Homebrew]: http://brew.sh/
