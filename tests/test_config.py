@@ -48,7 +48,7 @@ class TestConfig:
 
     @pytest.mark.parametrize('env,debug,testing,requires', [
         ('dev', True, False, []),
-        ('test', False, True, ['VALID_API_TOKEN']),
+        ('test', False, True, ['VALID_API_TOKEN', 'ACCESSIBLE_PROJECT']),
         ('prod', False, False, ['FLASK_SECRET_KEY', 'PORT']),
     ])
     @mock.patch('flask_forecaster.config._require')

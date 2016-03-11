@@ -61,6 +61,7 @@ class Config(object):
             )
         elif env == 'test':
             config_vars = dict(
+                PROJECT_ID=_require('ACCESSIBLE_PROJECT'),
                 VALID_TOKEN=_require('VALID_API_TOKEN'),
                 TESTING=True,
             )

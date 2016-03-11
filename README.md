@@ -13,6 +13,8 @@ can be selected using the environment variable `FLASK_CONFIG`:
  * `dev`: For local development, which starts the app in debug mode;
  * `test`: For testing and continuous integration environments (e.g. 
  Travis CI), which starts the app in testing mode and also requires:
+     * `ACCESSIBLE_PROJECT`: A project accessible using the supplied API
+     token; and
      * `VALID_API_TOKEN`: A valid token for integration testing; and
  * `prod` [**default**]: For production environments (e.g. Cloud 
  Foundry), which starts the app in its default mode and also requires:
@@ -31,7 +33,17 @@ In addition, for automatic deployment from Travis to Cloud Foundry, the
 following environment variables are required: `CF_ORG`; `CF_SPACE`; 
 `CF_USERNAME`; and `CF_PASSWORD`.
 
+The easiest way to set up a database locally, assuming that you're on OS
+X with [Homebrew], is:
+
+    brew install postgresql
+    psql -c 'create database flask_test;' -U postgres
+    
+This creates the required test DB using the default PostgreSQL user.
+
   [1]: https://travis-ci.org/textbook/flask-forecaster.svg?branch=master
   [2]: https://travis-ci.org/textbook/flask-forecaster
   [3]: https://coveralls.io/repos/github/textbook/flask-forecaster/badge.svg?branch=master
   [4]: https://coveralls.io/github/textbook/flask-forecaster?branch=master
+
+  [Homebrew]: http://brew.sh/

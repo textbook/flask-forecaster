@@ -3,7 +3,8 @@
 import logging
 import requests
 
-from ..constants import HttpStatus
+from flask_forecaster.constants import HttpStatus
+from flask_forecaster.tracker.models import ProjectSnapshot
 
 logger = logging.getLogger(__name__)
 
@@ -29,12 +30,36 @@ class Tracker(object):
 
         """
         response = requests.get(
-            self.BASE_URL + 'projects/' + str(project_id),
+            self.BASE_URL + 'projects/{}'.format(project_id),
             headers=self.headers,
         )
         result = self._handle_response(response)
         if result is not None and 'error' not in result:
             return result
+
+    def get_project_history(self, project_id, convert=False):
+        """Get the history for a specified project.
+
+        Arguments:
+          project_id (:py:class:`int` or :py:class:`str`): The ID of
+            the project.
+          convert (:py:class:`bool`, optional): Whether to convert the
+            JSON data into model objects (defaults to ``False``).
+
+        Returns:
+          :py:class:`list`: The history data.
+
+        """
+        response = requests.get(
+            self.BASE_URL + 'projects/{}/history/snapshots'.format(project_id),
+            headers=self.headers,
+
+        )
+        result = self._handle_response(response)
+        if result is not None and 'error' not in result:
+            if not convert:
+                return result
+            return [ProjectSnapshot.from_response(data) for data in result]
 
     @staticmethod
     def _handle_response(response):

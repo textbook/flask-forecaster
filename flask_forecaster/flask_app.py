@@ -5,13 +5,13 @@ import logging
 from flask import Flask, redirect, render_template, session, url_for
 from flask.ext.sqlalchemy import SQLAlchemy  # pylint: disable=no-name-in-module,import-error
 
-from .config import Config
-from .forms import TrackerApiForm
-from .tracker import Tracker
+from flask_forecaster.config import Config
+from flask_forecaster.forms import TrackerApiForm
+from flask_forecaster.tracker import Tracker
 
 logger = logging.getLogger(__name__)
 
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 
 app = Flask(__name__)
 app.config.from_object(Config.for_current_env())
