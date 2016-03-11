@@ -4,8 +4,6 @@ from setuptools import setup
 from setuptools.command.test import test as TestCommand
 import sys
 
-import flask_forecaster
-
 here = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -40,7 +38,7 @@ class PyTest(TestCommand):
 
 
 setup(
-    author=flask_forecaster.__author__,
+    author='Jonathan Sharpe',
     author_email='jsharpe@pivotal.io',
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -51,7 +49,9 @@ setup(
         'Programming Language :: Python :: 3 :: Only',
     ],
     cmdclass={'test': PyTest},
-    description=flask_forecaster.__doc__,
+    description=('A Flask-based web app for forecasting Pivotal Tracker '
+                 'projects.'),
+    include_package_data=True,
     install_requires=[
         'Flask',
         'Flask-SQLAlchemy',
@@ -62,6 +62,10 @@ setup(
     license='License :: OSI Approved :: ISC License (ISCL)',
     long_description=long_description,
     name='flask_forecaster',
+    package_data={
+        'static': 'flask_forecaster/static/*',
+        'templates': 'flask_forecaster/templates/*',
+    },
     packages=['flask_forecaster'],
     platforms='any',
     tests_require=[
@@ -72,5 +76,5 @@ setup(
         'responses',
     ],
     url='http://github.com/textbook/flask-forecaster/',
-    version=flask_forecaster.__version__,
+    version='0.0.5',
 )
