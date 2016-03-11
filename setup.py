@@ -6,11 +6,6 @@ import sys
 
 import flask_forecaster
 
-if sys.version_info < (3, 5):
-    err_msg = '{} requires Python 3.5 or above'.format(halliwell.__name__)
-    raise RuntimeError(err_msg)
-
-
 here = os.path.abspath(os.path.dirname(__file__))
 
 
