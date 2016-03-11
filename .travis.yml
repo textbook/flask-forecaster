@@ -14,7 +14,7 @@ before_script:
   - sleep 3 # give xvfb some time to start
   - psql -c 'create database flask_test;' -U postgres
   - python setup.py install
-  - python scripts/manage.py db upgrade
+  - python scripts/manage_db.py db upgrade
 script:
 - coverage run --source=flask_forecaster setup.py test
 after_success: coveralls
