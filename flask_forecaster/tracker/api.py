@@ -1,9 +1,10 @@
 """API interface."""
 
+from http import HTTPStatus
 import logging
+
 import requests
 
-from flask_forecaster.constants import HttpStatus
 from flask_forecaster.tracker.models import ProjectSnapshot
 
 logger = logging.getLogger(__name__)
@@ -64,7 +65,7 @@ class Tracker(object):
     @staticmethod
     def _handle_response(response):
         """Handle the standard response pattern."""
-        if response.status_code == HttpStatus.OK:
+        if response.status_code == HTTPStatus.OK:
             result = response.json()
             if 'error' in result:
                 logger.warning('API call failed with error %s', result['error'])
